@@ -55,11 +55,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="C:\Users\User\Downloads\J2534DotNet-master\J2534DotNet\J2534DotNet.csproj">
-      <Project>{d99e0de7-2f06-41e3-b33e-687e1b425a7f}</Project>
-      <Name>J2534DotNet</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

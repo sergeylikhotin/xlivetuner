@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLiveTuner", "XLiveTuner\XLiveTuner.csproj", "{DD680865-D32A-4A7E-80D1-C2571413AFD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "J2534DotNet", "C:\Users\User\Downloads\J2534DotNet-master\J2534DotNet\J2534DotNet.csproj", "{D99E0DE7-2F06-41E3-B33E-687E1B425A7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "J2534DotNet", "J2534DotNet\J2534DotNet.csproj", "{D99E0DE7-2F06-41E3-B33E-687E1B425A7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
