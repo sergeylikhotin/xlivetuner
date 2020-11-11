@@ -119,7 +119,8 @@ namespace SAE.J2534
         }
         internal void CheckResult(ResultCode Result)
         {
-            if (Result.IsNotOK()) throw new J2534Exception(Result, GetLastError());
+            if (Result.IsNotOK())
+                throw new J2534Exception(Result, GetLastError());
         }
 
         internal string GetLastError()  //Should never be called outside of API_LOCK
