@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using J2534DotNet;
+using SAE.J2534;
 
 namespace XLiveTuner
 {
@@ -13,19 +14,23 @@ namespace XLiveTuner
     {
         static void Main(string[] args)
         {
-            J2534Device j2534Device = new J2534Device { FunctionLibrary = "op20pt32.dll" };
-            J2534Extended j2534 = new J2534Extended();
-            if(!j2534.LoadLibrary(j2534Device))
+            API j2534Api = APIFactory.GetAPI("op20pt32.dll");
+            Device j2534Device = j2534Api.GetDevice();
+            Channel j2534Channel = j2534Device.GetChannel(Protocol.ISO15765, Baud.ISO15765, ConnectFlag.NONE);
+
+            j2534Channel.SetConfig(new[] {new SConfig(Parameter.ISO15765_BS, 32), new SConfig(Parameter.ISO15765_STMIN, 0)});
+
+            MessageFilter filter = new MessageFilter()
             {
-                Console.WriteLine("Ошибка при загрузке драйвера!");
-                Console.ReadLine();
-                return;
-            }
+                FilterType = Filter.FLOW_CONTROL_FILTER,
+                Mask = new byte[] { 0xFF, 0xFF, 0xFF, 0xFF },
+                Pattern = new byte[] { 0x00, 0x00, 0x07, 0xE8 },
+                FlowControl = new byte[] { 0x00, 0x00, 0x07, 0xE0 }
+            };
 
-            //int deviceId = 0;
-            //J2534Err openErr = j2534.PassThruOpen(IntPtr.Zero, ref deviceId);
-
-
+            j2534Channel.StartMsgFilter(filter);
+            j2534Channel.SendMessage(new byte[] { 0x00, 0x00, 0x07, 0xE0, 0x01, 0x00 });
+            GetMessageResults Response = j2534Channel.GetMessage();
 
             Console.ReadLine();
         }
